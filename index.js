@@ -36,7 +36,7 @@ client.on("messageCreate", async function(message){
     if(process.env.logsChannel){
         message.channel.type === "DM" ? logs.logsDiscord(argsBody,logsChannel, true) : logs.logsDiscord(argsBody,logsChannel, false);
     }
-
+    await message.channel.sendTyping();
     switch(command){
         case "ban":
             commands.ban(argsBody);
