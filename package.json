@@ -1,0 +1,24 @@
+{
+  "type": "module",
+  "name": "guardianbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tchereau/GuardianBot.git"
+  },
+  "author": "johacko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tchereau/GuardianBot/issues"
+  },
+  "homepage": "https://github.com/tchereau/GuardianBot#readme",
+  "dependencies": {
+    "discord.js": "^13.8.0",
+    "dotenv": "^16.0.1"
+  }
+}
