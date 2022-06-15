@@ -17,8 +17,7 @@ export const clear = async (argsBody) => {
             await messages.forEach(async message => {
                 await message.delete();
             });
-        }
-        );
+        });
         return;
     }
 }

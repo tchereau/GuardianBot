@@ -24,21 +24,22 @@ export const timeout = async (argsBody) => {
         return;
     }
     argsBody.client.guilds.cache.forEach(async guild => {
-        let membre = guild.members.cache.get(user.id)
-        if(await membre.permissions.has('ADMINISTRATOR')){
-            argsBody.message.channel.send('Vous ne pouvez pas exclure un administrateur.');
-            return;
-        }
-        try{
-            user.timeout(time * 60 * 1000, reason);
-            argsBody.client.users.fetch(user).then(user => {
-                argsBody.message.channel.send(`${user.tag} a été exclu pour ${time} minutes pour la raison: ${reason}`);
+        if (guild.id === argsBody.message.guild.id) {
+            let membre = guild.members.cache.get(user.id)
+            if(await membre.permissions.has('ADMINISTRATOR')){
+                argsBody.message.channel.send('Vous ne pouvez pas exclure un administrateur.');
+                return;
             }
-            );
-            return;
-        }catch(err){
-            console.log(err);
-            argsBody.message.channel.send(`une erreur est survenue: ${err}`);
+            try{
+                user.timeout(time * 60 * 1000, reason);
+                argsBody.client.users.fetch(user).then(user => {
+                    argsBody.message.channel.send(`${user.tag} a été exclu pour ${time} minutes pour la raison: ${reason}`);
+                });
+                return;
+            }catch(err){
+                console.log(err);
+                argsBody.message.channel.send(`une erreur est survenue: ${err}`);
+            }
         }
         return;
     });
