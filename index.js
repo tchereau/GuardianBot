@@ -62,6 +62,9 @@ client.on("messageCreate", async function(message){
         case "exclude":
             commands.timeout(argsBody);
             break;
+        case "clear":
+            commands.clear(argsBody);
+            break;
         default:
             message.reply("je ne connais pas cette commande");
             break;

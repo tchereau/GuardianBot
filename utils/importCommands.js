@@ -14,5 +14,6 @@ import { mute } from "../commands/mute.js";
 import { unmute } from "../commands/unmute.js";
 import { pp } from "../commands/pp.js";
 import { timeout } from "../commands/timeout.js";
+import { clear } from "../commands/clear.js";
 
-export default { ban, unban ,kick, mute, unmute, pp, timeout };
+export default { ban, unban ,kick, mute, unmute, pp, timeout, clear };
