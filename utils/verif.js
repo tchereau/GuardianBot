@@ -33,6 +33,11 @@ export const verif = async (argsBody) => {
     //si command est égal à une des commandes vérifiées ci-dessus
     if (argsBody.command === 'ban' || argsBody.command === 'unban' || argsBody.command === 'kick' || argsBody.command === 'exclude') {
         let user = argsBody.message.mentions.members.first();
+        //si l'utilisateur n'est pas mentionné
+        if (!user) {
+            argsBody.message.reply('Veuillez mentionner un utilisateur.');
+            return false;
+        }
         let membre = argsBody.message.guild.members.cache.get(user.id)
         //si user est plus haut gradé que l'auteur du message
         if (membre.roles.highest.comparePositionTo(argsBody.message.member.roles.highest) > 0) {
