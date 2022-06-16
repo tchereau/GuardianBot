@@ -2,7 +2,7 @@ import child from 'child_process';
 export const update = async (argsBody) => {
     //si l'utilisateur n'est pas l'admin on ne fait rien
     if (argsBody.message.author.id !== process.env.adminID) {
-        message.reply(`seul l'admin <@${process.env.adminID}> peut faire cela.`);
+        argsBody.message.reply(`seul l'admin <@${process.env.adminID}> peut faire cela.`);
         return;
     }
     // using child_process to run the command git pull then restart the bot
