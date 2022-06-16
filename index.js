@@ -4,7 +4,8 @@ import DiscordJS from 'discord.js';
 import *as logs from './utils/logs.js';
 import commands from './utils/importCommands.js';
 import { verif } from './utils/verif.js';
-
+import { restart } from './utils/restart.js';
+import { update } from './utils/update.js';
 
 console.log("\x1b[31mGuardianBot\x1b[0m");
 
@@ -22,6 +23,11 @@ client.on('ready', () => {
         client.user.setActivity(process.env.activity);
     }
     logsChannel = client.channels.cache.get(process.env.logsChannel);
+    // si process.env.restart = true alors on envoie un message dans le channel logs et process.env.restart = false
+    if(process.env.restart === true ){
+        logsChannel.send(`\x1b[32mRedémarrage effectué\x1b[0m`);
+        process.env.restart = false;
+    }
 });
 
 client.on("messageCreate", async function(message){
@@ -42,6 +48,12 @@ client.on("messageCreate", async function(message){
     switch(command){
         case 'pp':
             commands.pp(argsBody);
+            return;
+        case 'restart':
+            restart(argsBody);
+            return;
+        case 'update':
+            update(argsBody);
             return;
         case 'help':
             commands.help(argsBody);
