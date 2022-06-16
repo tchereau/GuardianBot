@@ -1,4 +1,4 @@
-import child from 'child_process';
+import exec from 'child_process';
 export const update = async (argsBody) => {
     //si l'utilisateur n'est pas l'admin on ne fait rien
     if (argsBody.message.author.id !== process.env.adminID) {
