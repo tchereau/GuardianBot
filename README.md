@@ -3,7 +3,7 @@
 <div align="center">
   <br />
   <p>
-    <img src="https://tchereau.fr/images/guardianbot.png" width="248" alt="nime-bot" />
+    <img src="https://tchereau.fr/images/guardianbot.png" width="248" alt="guardianbot" />
   </p>
 </div>
 
