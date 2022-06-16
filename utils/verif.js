@@ -30,17 +30,17 @@ export const verif = async (argsBody) => {
         }
     }
 
-    //verif if user has higher role than message author
-    //si command n'est pas clear
-    if (argsBody.command !== 'clear') {
+    //si command est égal à une des commandes vérifiées ci-dessus
+    if (argsBody.command === 'ban' || argsBody.command === 'unban' || argsBody.command === 'kick' || argsBody.command === 'exclude') {
         let user = argsBody.message.mentions.members.first();
         let membre = argsBody.message.guild.members.cache.get(user.id)
-        if (membre.roles.highest.position > argsBody.message.member.roles.highest.position) {
-            argsBody.message.reply('Vous n\'avez pas la permission de faire cela sur un membre plus haut gradé.');
+        //si user est plus haut gradé que l'auteur du message
+        if (membre.roles.highest.comparePositionTo(argsBody.message.member.roles.highest) > 0) {
+            argsBody.message.reply('Vous n\'avez pas la permission de faire cela sur un plus haut gradé.');
             return false;
         }
-        //si meme role
-        if (membre.roles.highest.position === argsBody.message.member.roles.highest.position) {
+        //si user a le même gradé que l'auteur du message
+        if (membre.roles.highest.comparePositionTo(argsBody.message.member.roles.highest) === 0) {
             argsBody.message.reply('Vous n\'avez pas la permission de faire cela.');
             return false;
         }
@@ -70,6 +70,5 @@ export const verif = async (argsBody) => {
             return false;
         }
     }
-    console.log("fin vérif")
     return true;
 }

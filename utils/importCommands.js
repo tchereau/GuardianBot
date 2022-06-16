@@ -13,5 +13,6 @@ import { kick } from "../commands/kick.js";
 import { pp } from "../commands/pp.js";
 import { timeout } from "../commands/timeout.js";
 import { clear } from "../commands/clear.js";
+import { help } from "../commands/help.js";
 
-export default { ban, unban ,kick, pp, timeout, clear };
+export default { ban, unban ,kick, pp, timeout, clear, help };

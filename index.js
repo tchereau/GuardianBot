@@ -43,6 +43,9 @@ client.on("messageCreate", async function(message){
         case 'pp':
             commands.pp(argsBody);
             return;
+        case 'help':
+            commands.help(argsBody);
+            return;
     }
     //admin commands
     if(await verif(argsBody) === true){
