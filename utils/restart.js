@@ -1,3 +1,4 @@
+import { exec } from 'child_process';
 //work only if started with "forever start index.js"
 export const restart = async (argsBody) => {
     //si l'utilisateur n'est pas l'id admin on ne fait rien
@@ -8,6 +9,8 @@ export const restart = async (argsBody) => {
     await argsBody.message.channel.send(`redémarrage en cours...`);
     await argsBody.client.destroy();
     console.log(`bot déconnecté, redémarrage en cours...`);
-    process.env.restart = true;
-    process.exit();
+    const child = exec(`forever restart ${__dirname}/../index.js`);
+    child.stdout.on('data', (data) => {
+        console.log(`stdout: ${data}`);
+    });
 }

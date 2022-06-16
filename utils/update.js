@@ -6,13 +6,11 @@ export const update = async (argsBody) => {
         return;
     }
     // using child_process to run the command git pull then restart the bot
-    const child = exec(`git pull`);
-    child.stdout.on('data', (data) => {
-        console.log(`stdout: ${data}`);
-    });
     await argsBody.message.channel.send(`redémarrage en cours...`);
     await argsBody.client.destroy();
     console.log(`bot déconnecté, redémarrage en cours...`);
-    process.env.restart = true;
-    process.exit();
+    const child = exec(`git pull && forever restart ${__dirname}/../index.js`);
+    child.stdout.on('data', (data) => {
+        console.log(`stdout: ${data}`);
+    });
 };
