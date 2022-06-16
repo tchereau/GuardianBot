@@ -1,5 +1,5 @@
 export const clear = async (argsBody) => {
-    const amount = argsBody.args[0];
+    let amount = argsBody.args[0];
     if(!amount){
         argsBody.message.channel.send('Veuillez préciser un nombre de messages à supprimer.');
         return;
