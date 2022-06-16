@@ -3,6 +3,7 @@ config();
 import DiscordJS from 'discord.js';
 import *as logs from './utils/logs.js';
 import commands from './utils/importCommands.js';
+import { verif } from './utils/verif.js';
 
 
 console.log("\x1b[31mGuardianBot\x1b[0m");
@@ -37,38 +38,39 @@ client.on("messageCreate", async function(message){
         message.channel.type === "DM" ? logs.logsDiscord(argsBody,logsChannel, true) : logs.logsDiscord(argsBody,logsChannel, false);
     }
     await message.channel.sendTyping();
+    //regular commands
     switch(command){
-        case "ban":
-            commands.ban(argsBody);
-            break;
-        case "unban":
-            commands.unban(argsBody);
-            break;
-        case "clearchannel":
-            commands.unban(argsBody);
-            break;
-        case "kick":
-            commands.kick(argsBody);
-            break;
-        case "mute":
-            commands.mute(argsBody);
-            break;
-        case "unmute":
-            commands.unmute(argsBody);
-            break;
-        case "pp":
+        case 'pp':
             commands.pp(argsBody);
-            break;
-        case "exclude":
-            commands.timeout(argsBody);
-            break;
-        case "clear":
-            commands.clear(argsBody);
-            break;
-        default:
-            message.reply("je ne connais pas cette commande");
-            break;
+            return;
     }
+    //admin commands
+    if(await verif(argsBody) === true){
+        switch(command){
+            case "ban":
+                commands.ban(argsBody);
+                break;
+            case "unban":
+                commands.unban(argsBody);
+                break;
+            case "clearchannel":
+                commands.unban(argsBody);
+                break;
+            case "kick":
+                commands.kick(argsBody);
+                break;
+            case "exclude":
+                commands.timeout(argsBody);
+                break;
+            case "clear":
+                commands.clear(argsBody);
+                break;
+            default:
+                message.reply("je ne connais pas cette commande");
+                break;
+        }
+    }
+    return;
 });
 
 client.login(process.env.token);
