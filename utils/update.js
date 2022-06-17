@@ -6,9 +6,9 @@ export const update = async (argsBody) => {
         return;
     }
     // using child_process to run the command git pull then restart the bot
-    await argsBody.message.channel.send(`redémarrage en cours...`);
+    await argsBody.message.channel.send(`mise à jour et redémarrage en cours...`);
     await argsBody.client.destroy();
-    console.log(`bot déconnecté, redémarrage en cours...`);
+    console.log(`bot déconnecté, mise à jour et redémarrage en cours...`);
     const child = exec(`git pull && forever restart ${process.env.PWD}/index.js`);
     child.stdout.on('data', (data) => {
         console.log(`stdout: ${data}`);
