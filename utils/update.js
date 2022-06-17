@@ -9,7 +9,7 @@ export const update = async (argsBody) => {
     await argsBody.message.channel.send(`redémarrage en cours...`);
     await argsBody.client.destroy();
     console.log(`bot déconnecté, redémarrage en cours...`);
-    const child = exec(`git pull && forever restart ${__dirname}/../index.js`);
+    const child = exec(`git pull && forever restart ${process.env.PWD}/index.js`);
     child.stdout.on('data', (data) => {
         console.log(`stdout: ${data}`);
     });

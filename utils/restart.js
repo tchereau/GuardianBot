@@ -9,7 +9,7 @@ export const restart = async (argsBody) => {
     await argsBody.message.channel.send(`redémarrage en cours...`);
     await argsBody.client.destroy();
     console.log(`bot déconnecté, redémarrage en cours...`);
-    const child = exec(`forever restart ${__dirname}/../index.js`);
+    const child = exec(`forever restart ${process.env.PWD}/index.js`);
     child.stdout.on('data', (data) => {
         console.log(`stdout: ${data}`);
     });
